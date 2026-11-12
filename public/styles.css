@@ -239,6 +239,13 @@ html, body {
 .resize.nw { left: -6px; top: -6px; cursor: nwse-resize; }
 
 /* ── live cursors ──────────────────────────────────────── */
+.marquee {
+  position: absolute; pointer-events: none; z-index: 15;
+  border: 1.5px solid var(--accent);
+  background: rgba(59, 108, 246, .08);
+  border-radius: 2px;
+}
+
 .cursors { position: absolute; inset: 0; pointer-events: none; z-index: 20; overflow: hidden; }
 .cursor {
   position: absolute; top: 0; left: 0;

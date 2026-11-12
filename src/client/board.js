@@ -255,10 +255,12 @@ export class Board {
   /* ── freehand ──────────────────────────────────────────────────── */
 
   startStroke (world) {
+    const ox = Math.round(world.x)
+    const oy = Math.round(world.y)
     const el = createElement(this.doc, this.el, this.ctx.meta, {
       kind: KIND.STROKE,
-      x: Math.round(world.x),
-      y: Math.round(world.y),
+      x: ox,
+      y: oy,
       color: this.ctx.strokeColor(),
       size: 3,
       authorName: this.me.name,
@@ -268,7 +270,10 @@ export class Board {
     claimLock(this.awareness, this.doc, this.locks, id)
     this.mode = 'draw'
     this.drawId = id
-    this.drawOrigin = { x: world.x, y: world.y }
+    // Points accumulate as absolute offsets from this origin; only the sampling check
+    // compares against the last pushed point.
+    this.strokeOrigin = { x: ox, y: oy }
+    this.lastPoint = { x: 0, y: 0 }
     this.pending = []
     this.setSelection([id])
     this.view.sync(id)
@@ -277,11 +282,11 @@ export class Board {
   extendStroke (world) {
     const el = this.elAt(this.drawId)
     if (!el) return
-    const dx = world.x - this.drawOrigin.x
-    const dy = world.y - this.drawOrigin.y
-    if (Math.hypot(dx, dy) < DRAW_MIN_DIST) return
-    this.drawOrigin = { x: world.x, y: world.y }
-    this.pending.push(Math.round(dx * 10) / 10, Math.round(dy * 10) / 10)
+    const x = world.x - this.strokeOrigin.x
+    const y = world.y - this.strokeOrigin.y
+    if (Math.hypot(x - this.lastPoint.x, y - this.lastPoint.y) < DRAW_MIN_DIST) return
+    this.lastPoint = { x, y }
+    this.pending.push(Math.round(x * 10) / 10, Math.round(y * 10) / 10)
     // Paint locally first so the pen feels immediate, then batch to the network.
     const flat = el.get('points').toArray().concat(this.pending)
     const node = this.nodeOf(this.drawId)
