@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sannolikt Retro Board — collaborative retrospective board</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body class="lobby">
+<main class="lobby-card">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <div>
+      <h1>Sannolikt Retro Board</h1>
+      <p class="sub">Stickers, frames and freehand drawing for team retrospectives.</p>
+    </div>
+  </div>
+
+  <form id="join" autocomplete="off">
+    <label>
+      <span>Your name</span>
+      <input id="name" type="text" maxlength="24" placeholder="Ada" required autofocus>
+    </label>
+    <label>
+      <span>Board</span>
+      <input id="room" type="text" maxlength="64" placeholder="retro-week-12" required
+             pattern="[A-Za-z0-9][A-Za-z0-9_-]{0,63}" title="Letters, digits, - or _.">
+    </label>
+    <button type="submit">Open board</button>
+  </form>
+
+  <ul id="recent" class="recent" hidden></ul>
+  <p class="hint">No accounts, no sign-in. Anyone with the link can edit.</p>
+</main>
+
+<script type="module" src="/app.js"></script>
+</body>
+</html>

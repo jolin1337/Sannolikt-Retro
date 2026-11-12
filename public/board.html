@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sannolikt Retro Board</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body class="board">
+
+<header class="topbar">
+  <div class="left">
+    <a class="logo" href="/">Sannolikt Retro Board</a>
+    <input id="title" class="title" value="Retrospective" maxlength="60" spellcheck="false"
+           aria-label="Board title">
+    <code id="roomname" class="roomname"></code>
+    <span id="sync" class="sync" title="Connection state">connecting…</span>
+  </div>
+  <div class="right">
+    <div id="avatars" class="avatars" title="Who is here"></div>
+    <button id="invite" class="ghost">Copy link</button>
+  </div>
+</header>
+
+<div id="stage" class="stage" tabindex="0">
+  <div id="world" class="world">
+    <div id="frames" class="frames"></div>
+    <svg id="ink" class="ink" width="1" height="1"><g id="ink-layer"></g></svg>
+    <div id="elements" class="elements"></div>
+  </div>
+  <div id="cursors" class="cursors"></div>
+  <div id="marquee" class="marquee" hidden></div>
+</div>
+
+<nav id="tools" class="tools" role="toolbar" aria-label="Tools">
+  <button data-tool="select" class="tool active" title="Select / move (V)">
+    <svg viewBox="0 0 24 24"><path d="M5 3l14 8-6.5 1.5L9 19z"/></svg><span>V</span>
+  </button>
+  <button data-tool="note" class="tool" title="Sticker (N)">
+    <svg viewBox="0 0 24 24"><path d="M5 5h14v9l-5 5H5z"/></svg><span>N</span>
+  </button>
+  <button data-tool="frame" class="tool" title="Frame (F)">
+    <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zm3 3v10h10V7z"/></svg><span>F</span>
+  </button>
+  <button data-tool="draw" class="tool" title="Draw (D)">
+    <svg viewBox="0 0 24 24"><path d="M3 20c3-6 6-9 9-11s5-1 5 1-2 4-7 7-4 3-7 3z"/></svg><span>D</span>
+  </button>
+  <div class="sep"></div>
+  <div id="swatches" class="swatches"></div>
+</nav>
+
+<div id="lock-toast" class="lock-toast" hidden></div>
+
+<footer class="bottombar">
+  <div class="zoom">
+    <button id="zoom-out" title="Zoom out (−)">−</button>
+    <button id="zoom-label" title="Reset zoom (Ctrl+0)">100%</button>
+    <button id="zoom-in" title="Zoom in (+)">+</button>
+    <button id="zoom-fit" title="Fit content (Shift+1)">Fit</button>
+  </div>
+  <div id="status" class="status">Scroll to pan, Ctrl+scroll to zoom, Space-drag to pan</div>
+</footer>
+
+<input id="clipboard" class="clipboard" type="text" tabindex="-1" aria-hidden="true">
+
+<script type="module" src="/app.js"></script>
+</body>
+</html>

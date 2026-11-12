@@ -1,0 +1,27 @@
+{
+  "name": "sannolikt-retro-board",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Collaborative web-based stickers whiteboard for retrospectives (Sannolikt Retro Board)",
+  "scripts": {
+    "build": "esbuild src/client/entry.js --bundle --format=esm --target=es2022 --minify --sourcemap --outfile=public/app.js",
+    "watch": "esbuild src/client/entry.js --bundle --format=esm --target=es2022 --sourcemap --outfile=public/app.js --watch",
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "test": "node scripts/smoke.mjs"
+  },
+  "dependencies": {
+    "lib0": "^0.2.102",
+    "ws": "^8.21.2",
+    "y-protocols": "^1.0.7",
+    "y-websocket": "^3.1.0",
+    "yjs": "^13.6.27"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
