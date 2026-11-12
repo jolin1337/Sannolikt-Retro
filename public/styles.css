@@ -125,6 +125,7 @@ html, body {
 /* ── stage ─────────────────────────────────────────────── */
 .stage {
   position: relative; overflow: hidden; outline: none;
+  touch-action: none; /* let pen/touch pointers draw instead of panning the page */
   background-color: var(--board-bg);
   background-image: radial-gradient(var(--dot) 1.1px, transparent 1.1px);
   background-size: var(--grid) 0px;

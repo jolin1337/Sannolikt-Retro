@@ -15,7 +15,7 @@ import { pathFromPoints } from './render.js'
 
 const CLICK_SLOP = 3 // px before a press counts as a drag
 const CURSOR_THROTTLE = 45 // ms between presence cursor publishes
-const DRAW_MIN_DIST = 2.5 // world units between pushed stroke points
+const DRAW_MIN_DIST = 1.5 // world units between pushed stroke points
 const DRAW_FLUSH_MS = 55 // ms between awareness stroke pushes
 const NUDGE = 8
 
@@ -308,7 +308,8 @@ export class Board {
       this.pending = []
     }
     if (el) {
-      if (el.get('points').length < 2) {
+      // Points always start with the [0, 0] origin; anything more was real movement.
+      if (el.get('points').length <= 2) {
         deleteElement(this.awareness, this.locks, this.el, id, this.me.id)
         this.view.nodes.delete(id)
         this.setSelection([])
@@ -527,6 +528,7 @@ export class Board {
   onPointerDown (e) {
     if (e.button === 2) return
     this.stage.focus({ preventScroll: true })
+    if (e.button === 0 && this.spaceDown) return this.beginPan(e)
     const world = this.camera.toWorld(e.clientX, e.clientY)
 
     const id = this.hitId(e, world)
@@ -540,18 +542,22 @@ export class Board {
       return
     }
 
-    if (dir && id) {
-      if (!this.free(id)) return this.refuse([id])
-      return this.beginResize(e, id, dir)
+    // Only the select tool grabs what is under the pointer. Drawing or creating must work
+    // from anywhere, even straight on top of existing elements.
+    if (this.tool === 'select') {
+      if (dir && id) {
+        if (!this.free(id)) return this.refuse([id])
+        return this.beginResize(e, id, dir)
+      }
+      if (id && !field) {
+        if (!this.selection.has(id)) this.setSelection([id])
+        return this.beginDrag(e, id)
+      }
+      if (field) return // unlocked field: normal text interaction
+      return this.beginMarquee(e)
     }
-    if (id && !field) {
-      if (!this.selection.has(id)) this.setSelection([id])
-      return this.beginDrag(e, id)
-    }
-    if (field) return // unlocked field: normal text interaction
-    if (this.tool === 'note' || this.tool === 'frame') return this.beginCreate(e)
     if (this.tool === 'draw') return this.beginDraw(world)
-    return this.beginMarquee(e)
+    return this.beginCreate(e)
   }
 
   beginPan (e) {
@@ -677,9 +683,16 @@ export class Board {
         this.setSelection(this.marquee.add ? [...this.marquee.base, ...sel] : sel)
         break
       }
-      case 'draw':
-        this.extendStroke(p)
+      case 'draw': {
+        // Include coalesced moves so fast strokes keep their shape instead of becoming chords.
+        const coalesced = typeof e.getCoalescedEvents === 'function' ? e.getCoalescedEvents() : null
+        if (coalesced && coalesced.length > 1) {
+          for (const ev of coalesced) this.extendStroke(this.camera.toWorld(ev.clientX, ev.clientY))
+        } else {
+          this.extendStroke(p)
+        }
         break
+      }
       case 'create':
         this.growCreation(p)
         break
