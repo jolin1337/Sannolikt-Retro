@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Sannolikt Retro Board">
+  <!-- Single-colour version for light backgrounds; flip the colours for dark backgrounds. -->
+  <rect width="512" height="512" rx="115" fill="#1f2430"/>
+  <g transform="translate(256 258) rotate(-5)">
+    <path d="M-126-150H126a24 24 0 0 1 24 24v76l-82 80H-126a24 24 0 0 1-24-24v-132a24 24 0 0 1 24-24z" fill="#fff"/>
+    <path d="M150 70 66 150l2-78z" fill="#1f2430"/>
+    <g fill="#1f2430" fill-opacity=".3">
+      <rect x="-94" y="-100" width="170" height="17" rx="8.5"/>
+      <rect x="-94" y="-56" width="206" height="17" rx="8.5"/>
+      <rect x="-94" y="-12" width="140" height="17" rx="8.5"/>
+    </g>
+  </g>
+</svg>

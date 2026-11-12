@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 168" role="img" aria-label="Sannolikt Retro Board">
+  <defs>
+    <clipPath id="frame"><rect width="168" height="168" rx="38"/></clipPath>
+    <radialGradient id="blend-purple" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#8b5cf6" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="blend-cyan" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#06b6d4" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#06b6d4" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="lift" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#101828" flood-opacity=".26"/>
+    </filter>
+  </defs>
+  <g clip-path="url(#frame)">
+    <rect width="168" height="168" fill="#3b6cf6"/>
+    <circle cx="27" cy="34" r="115" fill="url(#blend-purple)"/>
+    <circle cx="148" cy="84" r="122" fill="url(#blend-cyan)"/>
+  </g>
+  <g transform="translate(84 87) rotate(-5)" filter="url(#lift)">
+    <path d="M-42-50H42a8 8 0 0 1 8 8v26l-28 27H-42a8 8 0 0 1-8-8v-45a8 8 0 0 1 8-8z" fill="#fef08a"/>
+    <path d="M50 23 21 51l1-50z" fill="#eccb52"/>
+    <g fill="#1f2430" fill-opacity=".15">
+      <rect x="-31" y="-33" width="56" height="5.5" rx="2.75"/>
+      <rect x="-31" y="-19" width="68" height="5.5" rx="2.75"/>
+      <rect x="-31" y="-5" width="46" height="5.5" rx="2.75"/>
+    </g>
+  </g>
+  <text x="200" y="103" font-family="ui-sans-serif, system-ui, 'Segoe UI', Roboto, sans-serif" font-size="55" letter-spacing="-1">
+    <tspan font-weight="700" fill="#1f2430">Sannolikt</tspan><tspan font-weight="500" fill="#7b8494"> Retro Board</tspan>
+  </text>
+</svg>

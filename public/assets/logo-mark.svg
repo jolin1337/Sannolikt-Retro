@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Sannolikt Retro Board">
+  <defs>
+    <clipPath id="frame"><rect width="512" height="512" rx="115"/></clipPath>
+    <radialGradient id="blend-purple" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#8b5cf6" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="blend-cyan" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#06b6d4" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#06b6d4" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="lift" x="-25%" y="-25%" width="150%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#101828" flood-opacity=".28"/>
+    </filter>
+  </defs>
+  <!-- Soft conic blend, mirroring the app's brand-mark gradient (blue bottom-left, purple top-left, cyan right) -->
+  <g clip-path="url(#frame)">
+    <rect width="512" height="512" fill="#3b6cf6"/>
+    <circle cx="81" cy="104" r="352" fill="url(#blend-purple)"/>
+    <circle cx="452" cy="256" r="372" fill="url(#blend-cyan)"/>
+  </g>
+  <!-- Sticky note with folded corner -->
+  <g transform="translate(256 258) rotate(-5)" filter="url(#lift)">
+    <path d="M-126-150H126a24 24 0 0 1 24 24v76l-82 80H-126a24 24 0 0 1-24-24v-132a24 24 0 0 1 24-24z" fill="#fef08a"/>
+    <path d="M150 70 66 150l2-78z" fill="#eccb52"/>
+    <g fill="#1f2430" fill-opacity=".15">
+      <rect x="-94" y="-100" width="170" height="17" rx="8.5"/>
+      <rect x="-94" y="-56" width="206" height="17" rx="8.5"/>
+      <rect x="-94" y="-12" width="140" height="17" rx="8.5"/>
+    </g>
+  </g>
+</svg>
